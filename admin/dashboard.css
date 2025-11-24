@@ -1,0 +1,262 @@
+/* ====== General Styles ====== */
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f7f8fa;
+  color: #333;
+  margin: 0;
+  display: flex;
+}
+
+/* ====== Sidebar ====== */
+.sidebar {
+  width: 230px;
+  background: #222;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .logo {
+  text-align: center;
+  padding: 20px;
+  background: #111;
+  border-bottom: 1px solid #333;
+}
+
+.sidebar .logo h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.sidebar-nav .nav-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: #ccc;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.sidebar-nav .nav-item:hover,
+.sidebar-nav .nav-item.active {
+  background: #333;
+  color: #fff;
+}
+
+.sidebar-nav .icon {
+  margin-right: 10px;
+}
+
+/* ====== Main Content ====== */
+.main-content {
+  margin-left: 230px;
+  padding: 20px 30px;
+  width: calc(100% - 230px);
+}
+
+/* ====== Top Bar ====== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+}
+
+.topbar h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-info span {
+  color: #666;
+  font-size: 14px;
+}
+
+.avatar {
+  background: #333;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}
+
+/* ====== Stats Cards ====== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.stat-icon {
+  font-size: 24px;
+}
+
+.stat-info h3 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.stat-info p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+/* ====== Section ====== */
+.section {
+  margin-top: 30px;
+}
+
+.section h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* ====== Quick Actions ====== */
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.action-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.action-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.action-icon {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* ====== Sites Section ====== */
+.sites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+}
+
+.site-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status.active {
+  color: green;
+}
+
+.status.inactive {
+  color: #999;
+}
+
+.site-info p {
+  margin: 6px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.site-actions {
+  margin-top: 10px;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-right: 5px;
+}
+
+.btn-primary {
+  background: #333;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #111;
+}
+
+.btn-secondary {
+  background: #f3f3f3;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #e4e4e4;
+}
+
+/* ====== Empty State ====== */
+.empty-state {
+  text-align: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 40px;
+  color: #555;
+}
+
+.empty-icon {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 10px;
+}

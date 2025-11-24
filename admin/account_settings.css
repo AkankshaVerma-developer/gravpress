@@ -1,0 +1,53 @@
+.settings-container {
+    width: 600px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    font-family: Arial;
+}
+
+.settings-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin: 12px 0 5px;
+    font-weight: bold;
+}
+
+input[type=text],
+input[type=email],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.preview {
+    width: 80px;
+    height: 80px;
+    margin-top: 10px;
+    border-radius: 50%;
+}
+
+.btn-save {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: #4c5bf9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.msg{
+    color: green;
+    font-weight: bold;
+}

@@ -1,0 +1,219 @@
+:root{
+  --bg: #0f1724;
+  --card-bg: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  --glass: rgba(255,255,255,0.03);
+  --accent: #ff6b6b;
+  --accent-2: #7f5af0;
+  --muted: #9aa3b2;
+  --glass-border: rgba(255,255,255,0.06);
+  --radius: 14px;
+  --ease: cubic-bezier(.2,.9,.3,1);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg,#071227 0%, #071a2a 60%);
+  color: #e6eef8;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Prevent scroll while overlay active */
+.no-scroll{overflow:hidden}
+
+/* Page wrap */
+.wrap{
+  min-height: calc(100vh - 120px);
+  padding: 48px 5%;
+  position:relative;
+  overflow:hidden;
+ 
+}
+/*---------------------------------------------------activate button--------------------*/
+.activate-btn {
+  background: #0aa86f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.activate-btn:hover {
+  background: #088b5d;
+}
+
+/* Rotating bubbles - decorative */
+.bubble{
+  position:absolute;
+  border-radius:50%;
+  filter: blur(20px);
+  opacity:.14;
+  transform-origin:center;
+  animation:spin 20s linear infinite;
+  mix-blend-mode:screen;
+  z-index:0;
+}
+.b1{width:420px;height:420px;left:-120px;top:-80px;background:radial-gradient(circle at 30% 20%, rgba(127,90,240,0.6), transparent 35%); animation-duration:28s;}
+.b2{width:320px;height:320px;right:-80px;top:-60px;background:radial-gradient(circle at 70% 80%, rgba(255,107,107,0.45), transparent 40%); animation-duration:32s; animation-direction:reverse;}
+.b3{width:200px;height:200px;left:40%;bottom:-100px;background:radial-gradient(circle at 50% 50%, rgba(22,203,255,0.28), transparent 40%); animation-duration:36s;}
+
+@keyframes spin{ from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Subheader */
+.subhead{
+  position:relative;
+  z-index:3;
+  max-width:1100px;
+  margin:0 auto 30px;
+  text-align:center;
+  margin-top: 80px;
+  padding:26px;
+  border-radius:18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  box-shadow: 0 10px 50px rgba(2,6,23,0.5), inset 0 -1px 0 var(--glass-border);
+  backdrop-filter: blur(6px) saturate(120%);
+  border:1px solid var(--glass-border);
+}
+
+.lead{ font-size:28px; margin:6px 0; letter-spacing:.2px; color: #f8fbff; }
+.subtxt{ margin:4px 0 14px; color:var(--muted); font-size:14px; }
+
+/* Choices nav */
+.choices{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px; }
+.choice{
+  border:0; padding:10px 14px; border-radius:999px; cursor:pointer; font-weight:600;
+  background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  color:#e8f1ff; box-shadow: 0 4px 18px rgba(2,6,23,0.5); transition:transform .25s var(--ease), box-shadow .25s;
+}
+.choice:hover{ transform: translateY(-6px) scale(1.03); box-shadow: 0 18px 40px rgba(127,90,240,0.12); }
+
+/* Card grid */
+.cardwrap{ position:relative; z-index:3; margin-top:34px; max-width:1200px; margin-left:auto; margin-right:auto; }
+.cardgrid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap:22px;
+}
+
+/* Card */
+.card{
+  perspective:1200px;
+  cursor:pointer;
+  user-select:none;
+  border-radius:var(--radius);
+  transform-style:preserve-3d;
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+  will-change:transform;
+  background:var(--card-bg);
+  border:1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 8px 30px rgba(2,8,23,0.45);
+}
+.card:focus{outline:none; box-shadow:0 22px 50px rgba(127,90,240,0.12); transform: translateY(-10px) scale(1.02);}
+
+/* Inner with tilt */
+.cardinner{
+  padding:22px;
+  transform: translateZ(0);
+  transition: transform .5s var(--ease);
+  border-radius:var(--radius);
+  min-height:220px;
+  display:flex; flex-direction:column; gap:12px;
+}
+
+/* card image area */
+.cardimg{
+  height:100px;
+  border-radius:12px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  box-shadow: inset 0 -2px 12px rgba(0,0,0,0.35);
+  transform: translateZ(30px) translateY(-6px) scale(1.02);
+  transition: transform .6s var(--ease);
+  background-size: 200% 200%;
+  background-image: linear-gradient(120deg, rgba(127,90,240,0.18), rgba(255,107,107,0.14));
+}
+
+/* Titles */
+.title{ margin:0; font-size:20px; color:#fff; letter-spacing:0.2px; transform: translateZ(40px); }
+.meta{ margin:0; color:var(--muted); font-size:13px; transform: translateZ(20px); }
+.tag{
+  margin-left:auto; align-self:flex-end; padding:6px 10px; border-radius:10px; font-weight:700;
+  background: linear-gradient(90deg,var(--accent), var(--accent-2));
+  color:#fff; font-size:12px; transform: translateZ(30px);
+}
+
+/* Hover 3D tilt & pop */
+.card:hover{ transform: translateY(-18px) rotateX(6deg) rotateY(-4deg) scale(1.02); box-shadow: 0 28px 80px rgba(2,6,23,0.6); }
+.card:hover .cardimg{ transform: translateZ(60px) translateY(-10px) scale(1.05); }
+
+/* Click pulse effect */
+.card:active{ transform: scale(.99); transition: transform .12s; }
+
+/* Overlay preview */
+.overlay{
+  position:fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:999;
+  background: linear-gradient(180deg, rgba(2,4,10,0.6), rgba(2,4,10,0.8));
+  opacity:0; pointer-events:none; transition:opacity .28s var(--ease);
+}
+.overlay.visible{ opacity:1; pointer-events:auto; }
+
+.overlaycard{
+  width:min(820px, 92%);
+  border-radius:18px;
+  padding:28px;
+  background:  solid linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 30px 90px rgba(1,6,20,0.8);
+  transform: translateY(30px) scale(.98);
+  transition: transform .45s cubic-bezier(.2,.9,.25,1), opacity .3s;
+  opacity:0;
+  position:relative;
+}
+.overlaycard.popin{ transform: translateY(0) scale(1); opacity:1; background-color: black;}
+.overlaycard.expandout{ transform: scale(1.05) translateY(-10px); filter: blur(.6px); }
+
+/* overlay content */
+.overlayclose{
+  position:absolute; right:16px; top:10px; font-size:24px; cursor:pointer; color:rgba(255,255,255,0.7);
+}
+.ovcontent{ text-align:left; color:#eaf3ff; }
+.ovcontent h2{ margin:0 0 8px; font-size:24px; }
+.ovcontent p{ color:var(--muted); margin:0 0 18px; }
+.ovbtns{ display:flex; gap:12px; margin-top:12px; }
+.btn{
+  padding:10px 16px; border-radius:12px; cursor:pointer; border:0; font-weight:700;
+  background:linear-gradient(90deg,var(--accent), var(--accent-2));
+  color:#fff; box-shadow: 0 10px 30px rgba(127,90,240,0.12);
+}
+.btn.ghost{ background:transparent; border:1px solid rgba(255,255,255,0.06); color:#dff0ff; }
+
+/* Responsive tweaks */
+@media (max-width:720px){
+  .lead{ font-size:22px }
+  .cardinner{ padding:18px; min-height:200px; }
+}
+
+/* Section-specific unique styling examples (each section gets its "vibe") */
+.subhead{ border-left:6px solid rgba(127,90,240,0.16); }
+.card:nth-child(1) .cardimg{ background-image:linear-gradient(120deg, rgba(127,90,240,0.28), rgba(255,107,107,0.18)); }
+.card:nth-child(2) .cardimg{ background-image:linear-gradient(120deg, rgba(22,203,255,0.24), rgba(127,90,240,0.14)); }
+.card:nth-child(3) .cardimg{ background-image:linear-gradient(120deg, rgba(63,219,132,0.22), rgba(127,90,240,0.12)); }
+.card:nth-child(4) .cardimg{ background-image:linear-gradient(120deg,  rgba(127,90,240,0.28), rgba(127,90,240,0.08)); filter: contrast(.95) saturate(1.2); }
+.card:nth-child(5) .cardimg{ background-image:linear-gradient(120deg, rgba(242, 232, 203, 0.16), rgba(127,90,240,0.10)); }
+.card:nth-child(6) .cardimg{ background-image:linear-gradient(120deg, rgba(180,141,255,0.18), rgba(127,90,240,0.10)); }
+
+/* small flourish: pop-shadow animation for tags */
+.tag{ transition: transform .35s var(--ease), box-shadow .35s; }
+.card:hover .tag{ transform: translateY(-6px) scale(1.04); box-shadow: 0 12px 30px rgba(127,90,240,0.16); }
+
+/* Accessibility focus */
+.card:focus-visible{ outline: 3px solid rgba(127,90,240,0.18); outline-offset:6px; }
+.choice:focus-visible{ box-shadow: 0 10px 30px rgba(127,90,240,0.12); }
+
+/* Footer override if needed (footer.php might exist) */
+footer{ position:relative; z-index:3; }
+

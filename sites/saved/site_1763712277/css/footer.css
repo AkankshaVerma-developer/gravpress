@@ -1,0 +1,41 @@
+  .site-footer {
+  color: #fff;
+  background-color: black;
+  padding: 40px 60px;
+  text-align: center;
+  margin-top: 80px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-left small {
+  color:white;
+  font-size: 0.9rem;
+}
+
+.footer-nav a {
+  text-decoration: none;
+  color: #f5f5f5;
+  margin-left: 25px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+  color: #ffcc00;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .header-inner {
+    padding: 15px 25px;
+  }
+}

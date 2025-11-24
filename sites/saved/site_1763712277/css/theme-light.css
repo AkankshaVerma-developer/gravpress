@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+:root {
+  --blue: #007bff;
+  --light-bg: #f8fbff;
+  --dark-text: #1e1e2a;
+  --soft-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+  position: relative;
+  z-index: 0;
+  background-color: #f9fafc;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 20%,rgb(245, 194, 202), transparent 30%),
+              radial-gradient(circle at 80% 80%, rgb(245, 223, 230), transparent 30%);
+  background-size: 120px 120px;
+  opacity: 1.3;
+  animation: waveMove 10s linear infinite alternate;
+  z-index: -1;
+}
+
+@keyframes waveMove {
+  from {
+    transform: translateX(0) translateY(0);
+  }
+  to {
+    transform: translateX(-40px) translateY(-20px);
+  }
+}
+
+
+/* ---------------------
+   MAIN GRAVPRESS HEADER
+---------------------- */
+.gp-header {
+  background:black;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  
+}
+
+.gp-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 50px;
+}
+
+.gp-logo {
+  font-weight: 700;
+  font-size: 1.5em;
+  color: var(--light-bg);
+}
+
+.gp-nav a {
+  text-decoration: none;
+  color:white;
+  margin: 0 15px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.gp-nav a:hover, .gp-nav .active {
+  color:yellow;
+}
+
+/* ---------------------
+   LIGHT THEME HEADER
+---------------------- */
+.light-header {
+  background: linear-gradient(90deg, #e8f1ff, #ffffff);
+  padding: 25px 50px;
+  border-radius: 0 0 40px 40px;
+  
+}
+
+.light-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.light-logo {
+  font-size: 1.8em;
+  color: var(--blue);
+}
+
+.light-nav a {
+  margin-left: 25px;
+  color: #111010;
+  text-decoration:wavy;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.light-nav a:hover {
+  color: var(--blue);
+}
+
+/* ---------------------
+   HERO SECTION
+---------------------- */
+.light-hero {
+  background: linear-gradient(135deg, #ecd3e5, #ffffff);
+  text-align: center;
+  padding: 120px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.light-hero h2 {
+  font-size: 2.8em;
+  margin-bottom: 15px;
+  color: #0a2540;
+}
+
+.light-hero p {
+  color: black;
+  font-size: 1.1em;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--blue);
+  color: #fff;
+  text-decoration:wavy;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 600;
+  margin-top: 25px;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: #031b3d;
+  transform: scale(1.05);
+}
+
+/* ---------------------
+   FEATURES SECTION
+---------------------- */
+.light-features {
+  text-align: center;
+  padding: 80px 30px;
+}
+
+.light-features h2 {
+  font-size: 2em;
+  margin-bottom: 40px;
+}
+
+/* ================================
+   Rotating Feature Cards Animation
+================================ */
+.features-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.feature {
+  background: rgba(241, 124, 124, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  width: 250px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease;
+  animation: rotateCard 14s linear infinite;
+  transform-style: preserve-3d;
+}
+
+/* Add a gentle hover effect (optional) */
+.feature:hover {
+  transform: scale(1.05);
+}
+
+/* Card inner elements */
+.feature img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 15px;
+}
+
+/* Rotation animation */
+@keyframes rotateCard {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+/* ---------------------
+   SHOWCASE SECTION
+---------------------- */
+.light-showcase {
+  text-align: center;
+  padding: 80px 30px;
+  background: linear-gradient(rgb(253, 240, 242));
+}
+
+.showcase-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.showcase-card {
+  width: 280px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--soft-shadow);
+  transition: 1s ease;
+ border-style: solid;
+  background: #fff;
+}
+
+.showcase-card:hover {
+   width: 320px;
+  transform: scale(1.05);
+}
+
+.showcase-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.showcase-card h4 {
+  margin: 15px 0;
+  color: #333;
+}
+
+/* ---------------------
+   FOOTER SECTION
+---------------------- */
+.light-footer {
+  background: #fff;
+  padding: 40px 0;
+  text-align: center;
+  color: #780606;
+  border-top: 1px solid #eee;
+}

@@ -1,0 +1,152 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f6f6ef;
+}
+
+/* HEADER */
+.head {
+  background: linear-gradient(90deg,olive,rgb(204, 204, 8));
+  padding: 20px 0;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.box {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.menu ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+.menu a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+  
+}
+
+.menu a:hover {
+  opacity: 0.8;
+}
+
+.cart {
+  background: #fff;
+  /* color:olive; */
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  background-color: rgb(86, 86, 5);
+}
+
+/* CHECKOUT LAYOUT */
+.checkout-container {
+    display: flex;
+    gap: 30px;
+    padding: 40px;
+}
+
+/* LEFT SIDE */
+.checkout-left {
+    width: 60%;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.checkout-left h2 {
+    margin-bottom: 20px;
+}
+.checkout-left label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+.checkout-left input,
+.checkout-left textarea,
+.checkout-left select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.checkout-left textarea {
+    height: 120px;
+}
+.place-order {
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    background: olive;
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+}
+.place-order:hover {
+    background: rgb(204, 204, 8);
+    color: black;
+}
+
+/* RIGHT SIDE */
+.checkout-right {
+    width: 35%;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.checkout-right h2 {
+    margin-bottom: 20px;
+}
+
+/* ITEM BOX */
+.summary-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+.summary-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.summary-item .price {
+    color: olive;
+    font-weight: bold;
+}
+
+/* TOTAL BOX */
+.total-box {
+    text-align: right;
+}
+.total-box span {
+    color: olive;
+}
+  
+/* RESPONSIVE */
+@media(max-width: 850px) {
+    .checkout-container {
+        flex-direction: column;
+    }
+    .checkout-left, .checkout-right {
+        width: 100%;
+    }
+}
