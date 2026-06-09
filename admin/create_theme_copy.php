@@ -1,5 +1,4 @@
 <?php
-// admin/create_theme_copy.php
 session_start();
 require_once "../connection/db.php";
 
@@ -64,8 +63,6 @@ foreach ($phpFiles as $file) {
     if ($file->isFile() && preg_match('/\.php$/i', $file->getFilename())) {
         $path = $file->getRealPath();
         $contents = file_get_contents($path);
-
-        // common variants -> replace to local 'css/...' or 'images/...'
         // css:
         $contents = preg_replace('#(\.\./){1,}css/#i', 'css/', $contents);
         $contents = preg_replace('#/user/css/#i', 'css/', $contents); // if absolute used
@@ -73,7 +70,6 @@ foreach ($phpFiles as $file) {
         $contents = preg_replace('#(\.\./){1,}images/#i', 'images/', $contents);
         $contents = preg_replace('#/user/images/#i', 'images/', $contents);
 
-        // also fix src/href that use ../../.. style to point to local css/images if they include "css" or "images"
         // (keeps other absolute links untouched)
         $contents = preg_replace_callback(
             '#(href|src)\s*=\s*([\'"])([^\'"]+)([\'"])#i',
@@ -99,8 +95,7 @@ foreach ($phpFiles as $file) {
 }
 
 /*
- * 4) Auto-inject click-to-edit JS before </body> in every copied PHP file
- *    We inject a small marker comment so it's easy to identify later.
+  4) Auto-inject click-to-edit JS 
  */
 $injectJS = <<<EOD
 <!-- AUTO-INJECT : CLICK TO EDIT -->
@@ -128,9 +123,9 @@ document.addEventListener("click", function(e){
 
 /*
   BETTER SELECTOR SYSTEM
-  ✔ No nth-child() unless required
-  ✔ Uses id, class, or closest stable parent
-  ✔ Works for headings, titles, spans, buttons, etc.
+   No nth-child() unless required
+   Uses id, class, or closest stable parent
+   Works for headings, titles, spans, buttons, etc.
 */
 function getCleanSelector(el){
 
@@ -173,7 +168,7 @@ foreach ($phpFiles as $file) {
     }
 }
 
-// 5) Save path of custom theme in DB (active_theme.user_custom_theme)
+// 5) Save path of custom theme in DB 
 $stmt = $conn->prepare("UPDATE active_theme SET user_custom_theme = ? WHERE user_id = ?");
 $copyDbPath = "sites/" . $user_id . "_" . $theme . "_copy"; // web path relative to project root
 $stmt->bind_param("si", $copyDbPath, $user_id);

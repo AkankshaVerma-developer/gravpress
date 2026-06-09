@@ -65,7 +65,7 @@ $filtered = ($category === 'all')
   <?php foreach($filtered as $item): ?>
     <div class="card">
       <img src="<?= $item['image'] ?>" alt="">
-      <h3>Modern Chairs</h3>Modern Chairs</p>
+      <h3>Chairs</h3>Modern Chairs</p>
       <a href="product-detail.php?id=<?= $item['id'] ?>" class="btn-detail">View Details</a>
     </div>
   <?php endforeach; ?>

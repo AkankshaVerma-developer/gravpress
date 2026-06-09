@@ -9,7 +9,9 @@ session_start();
   <title>GravPress Shop - Ecommerce Preview</title>
   <link rel="stylesheet" href="../../../css/theme-ecommerce/home.css">
 </head>
-<body>
+<body> 
+<?php do_action('gp_before_header'); ?>   <!--  Hook inserted here -->
+
  <header class="gp-header">
   <div class="gp-container">
     <div class="gp-logo">GravPress</div>
@@ -54,6 +56,9 @@ session_start();
 
   <!-- FEATURE STRIP -->
   <section class="strip">
+  
+<?php do_action('gp_before_content'); ?>  <!--  Plugins can inject banners etc -->
+
     <div class="strip-box">
       <div class="item">
         <img src="https://img.icons8.com/fluency/48/shipped.png" alt="">
@@ -114,6 +119,8 @@ session_start();
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyoL4HLKXkGH-7qM8A9OK7PkYugZluILc9Fg&s" alt="Contact Us">
       </div>
     </div>
+    <?php do_action('gp_after_content'); ?> <!--  Plugins add ads, forms, share buttons -->
+
   </section>
 
   <!-- FOOTER -->
@@ -143,6 +150,7 @@ session_start();
       <p>© 2025 GravShop. All Rights Reserved.</p>
     </div>
   </footer>
-
+  <?php do_action('gp_enqueue_scripts'); ?><!--plugin add-->
+<?php do_action('gp_before_footer'); ?> <!-- plugin Footer widgets -->
 </body>
 </html>

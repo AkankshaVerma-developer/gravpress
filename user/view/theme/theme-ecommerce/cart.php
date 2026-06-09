@@ -114,6 +114,7 @@ foreach ($_SESSION['cart'] as $c) {
 </header>
 
 <div class="cart-container">
+<?php do_action('gp_before_content'); ?>  <!--  Plugins can inject banners etc -->
 
 <?php if (isset($_GET['updated'])): ?>
 <div class="alert">Quantity Updated ✔</div>
@@ -171,6 +172,7 @@ foreach ($_SESSION['cart'] as $c) {
 </div>
 
 <?php endif; ?>
+<?php do_action('gp_after_content'); ?> <!--  Plugins add ads, forms, share buttons -->
 
 </div>
 

@@ -63,7 +63,7 @@ if (isset($_POST['save'])) {
 
 <div class="settings-container">
 
-    <h2>Account Settings</h2>
+
     <?php if (isset($msg)) echo "<p class='msg'>$msg</p>"; ?>
 
     <form method="POST" enctype="multipart/form-data">

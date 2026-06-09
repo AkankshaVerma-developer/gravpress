@@ -86,20 +86,39 @@ h2 {
        View Website
     </a>
     <!-- Delete Button -->
-    <a class="btn-delete"
-       href="delete_site.php?id=<?php echo $row['id']; ?>"
+    <!-- <a class="btn-delete"
+       href="delete_site.php?id=""
        onclick="return confirm('Are you sure you want to delete this site?');">
        Delete
-    </a>
+    </a> -->
 </div>
 <?php } ?>
 
-<?php if (isset($_GET['msg']) && $_GET['msg'] == 'deleted') { ?>
-<div style="background:#d4edda;padding:12px;border-left:4px solid #28a745;margin-bottom:15px;">
-    Website deleted successfully.
-</div>
-<?php } ?>
 
+<?php  ?>
+<?php
+// CREATE FOLDER IF NOT EXISTS
+$folder = "saved_site/";
+if (!is_dir($folder)) {
+    mkdir($folder, 0777, true);
+}
+
+// GET HTML CONTENT
+$content = $_POST['content'] ?? '';
+
+if (empty($content)) {
+    echo " Nothing to save!";
+    exit;
+}
+
+// GENERATE FILE NAME
+$filename = $folder . "website_" . time() . ".html";
+
+// SAVE FILE
+file_put_contents($filename, $content);
+
+echo "✅ Website Saved Successfully! File: " . basename($filename);
+?>
 
 </body>
 </html>

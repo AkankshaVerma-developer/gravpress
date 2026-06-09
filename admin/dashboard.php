@@ -114,12 +114,12 @@ $active_sites_count = 0;
             <div class="section">
                 <h2>Quick Actions</h2>
                 <div class="actions-grid">
-                    <a href="create_site.php" class="action-card">
+                    <a href="create_own_website.php" class="action-card">
                         <span class="action-icon">➕</span>
                         <h3>Create New Site</h3>
                         <p>Start building your website</p>
                     </a>
-                    <a href="themes.php" class="action-card">
+                    <a href="../user/view/gravtheme.php" class="action-card">
                         <span class="action-icon">🎨</span>
                         <h3>Browse Themes</h3>
                         <p>Choose from our collection</p>

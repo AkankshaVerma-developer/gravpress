@@ -6,7 +6,7 @@
     <footer class="site-footer">
   <div class="container footer-inner">
     <div class="footer-left">
-      <small>&copy; <?php echo date('Y'); ?> GravPress — Built with @graventon </small>
+      <small>&copy; <?php echo date('Y'); ?> GravPress — Built with @Akanksha </small>
     </div>
     <div class="footer-right">
       <nav class="footer-nav">

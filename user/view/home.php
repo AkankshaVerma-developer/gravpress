@@ -1,5 +1,26 @@
 <?php
- require_once 'header.php'; 
+
+include "header.php";
+// require hooks first
+// require_once __DIR__ . '/core/plugins/hooks.php';
+
+// require loader (which uses hooks)
+// require_once __DIR__ . '/core/plugins/loader.php';
+
+// optional: require manager if you have functions there (step 3)
+// require_once __DIR__ . '/core/plugins/manager.php';
+
+// Run loader to include active plugins (adjust paths if needed)
+// gp_load_active_plugins(
+//     __DIR__ . '/plugins',            // plugins dir
+//     __DIR__ . '/data/active_plugins.json'  // active JSON
+// );
+
+// Now call init action so plugins get their init hooks called
+// do_action('init');
+
+// rest of bootstrap...
+// e.g. $app = new App(); route, render, etc.
 ?>
 <html>
     <head>
@@ -51,7 +72,7 @@
           <div class="card-body">
             <h3 class="card-title">Media Library</h3>
             <p class="card-desc">Upload images and attachments; serve optimized thumbnails to pages and cards.</p>
-            <a class="card-link" href="gravmedia.php">Media →</a>
+            <a class="card-link" href="../../admin/media.php">Media →</a>
           </div>
         </article>
         <!-- Card 3 -->

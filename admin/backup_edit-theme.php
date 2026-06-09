@@ -1,4 +1,4 @@
-<!-- //not use this code anywhere right now -->
+<!------------ //not use this code anywhere right now --------------->
 <?php 
 session_start();
 require_once "../connection/db.php";

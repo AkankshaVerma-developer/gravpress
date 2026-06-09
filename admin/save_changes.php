@@ -30,13 +30,11 @@ if (!file_exists($pagePath)) {
     exit;
 }
 
-$content = file_get_contents($pagePath);
 
-// We will use a conservative approach:
+ $content = file_get_contents($pagePath);
 //  - For text: find the element by selector and replace innerHTML/text between tags (simple regex)
 //  - For image: find <img ... src="..."> and replace src
-//  - For color/font: alter style attribute or insert/update style attribute
-// Note: This is not a full DOM parser but works for typical theme HTML structures.
+ //  - For color/font: alter style attribute or insert/update style attribute
 
 function preg_quote_selector_for_regex($sel) {
     // From selector like "h2.hero: nth-child(2)" we will only keep tag+classes+nth-child

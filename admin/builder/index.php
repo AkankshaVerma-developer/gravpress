@@ -1,145 +1,137 @@
-<!DOCTYPE html>
+<?php
+session_start();
+require_once __DIR__ . '/../../connection/db.php'; 
+
+// simple auth-check 
+if (!isset($_SESSION['user_id'])) {
+    // for local testing set a default
+    $_SESSION['user_id'] = 1;
+}
+$user_id = intval($_SESSION['user_id']);
+
+$website_id = isset($_GET['website_id']) ? intval($_GET['website_id']) : 0;
+if ($website_id <= 0) {
+   
+}
+
+// load website title 
+$website_title = "Building own Website";
+if ($website_id) {
+    $stmt = $conn->prepare("SELECT title FROM websites WHERE website_id = ? AND user_id = ?");
+    $stmt->bind_param("ii", $website_id, $user_id);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    if ($res && $res->num_rows) {
+        $row = $res->fetch_assoc();
+        $website_title = $row['title'];
+    }
+    $stmt->close();
+}
+?>
+<!doctype html>
 <html>
 <head>
-    <title>Website Builder</title>
-   <style>
-    body {
-    margin: 0;
-    font-family: Arial;
-}
+  <meta charset="utf-8"/>
+  <title>Website Builder — <?=htmlspecialchars($website_title)?></title>
 
-.builder-container {
-    display: flex;
-    height: 100vh;
-}
+  <!-- GrapesJS core CSS -->
+  <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet"/>
+  <!-- optional preset stylesheet (we rely on plugin via CDN in JS) -->
 
-/* Sidebar */
-.sidebar {
-    width: 240px;
-    background: #1e1f26;
-    color: #fff;
-    padding: 20px;
-    overflow-y: auto;
-}
-
-.sidebar h2 {
-    margin-bottom: 10px;
-}
-
-.block {
-    padding: 12px;
-    background: #2d2f39;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    cursor: grab;
-}
-
-.block:hover {
-    background: #3a3c48;
-}
-
-/* Canvas */
-.canvas {
-    flex: 1;
-    background: #f5f5f5;
-    border-left: 3px solid #ddd;
-    padding: 20px;
-    overflow-y: scroll;
-}
-
-.placeholder {
-    text-align: center;
-    color: #818181;
-    margin-top: 40px;
-}
-
-/* Dropped Elements */
-.element {
-    border: 1px dashed #aaa;
-    padding: 20px;
-    margin-bottom: 15px;
-    background: #fff;
-    position: relative;
-}
-
-.remove-btn {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    background: red;
-    color: #fff;
-    font-size: 12px;
-    border: none;
-    padding: 3px 6px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-    </style>
-</head>
-
+  <!-- Our builder styles -->
+  <link href="assets/css/builder.css" rel="stylesheet"/>
+  <style> /* small page-level fixes */ body, html { height:100%; margin:0; } </style></head>
 <body>
 
-<div class="builder-container">
+<!-- Top toolbar -->
+<div class="gp-topbar">
+  <!-- <div class="gp-left">
+    <button id="addPageBtn" class="gp-btn">+ New Page</button>
+    <select id="pagesSelect" class="gp-select">page</select>
+    <button id="renamePageBtn" class="gp-btn">Rename</button>
+  </div> -->
+  
 
-    <!-- LEFT SIDEBAR WITH BLOCKS -->
-    <div class="sidebar">
-        <h2>Blocks</h2>
+  <div class="gp-center"> 
+    <strong><?=htmlspecialchars($website_title)?></strong>
+  </div>
 
-        <div class="block" draggable="true" data-file="header.html">Header</div>
-        <div class="block" draggable="true" data-file="text.html">Text</div>
-        <div class="block" draggable="true" data-file="image.html">Image</div>
-        <div class="block" draggable="true" data-file="button.html">Button</div>
-        <div class="block" draggable="true" data-file="two-column.html">Two Column</div>
-        <div class="block" draggable="true" data-file="footer.html">Footer</div>
-    </div>
+  <div class="gp-right">
+    <div id="editorPreview" style="transform-origin: top left;">
+    <button id="zoomOut" class="gp-btn">-</button>
+    <span id="zoomVal">100%</span>
+    <button id="zoomIn" class="gp-btn">+</button>
+ </div>
 
-    <!-- MAIN CANVAS -->
-    <div class="canvas" id="canvas">
-        <h2 class="placeholder">Drag Blocks Here</h2>
-    </div>
+    <!-- <button id="previewBtn" class="gp-btn">Preview</button> -->
+    <a href="../saved_site.php" id="savePageBtn" class="gp-btn gp-primary">Save</a>
+    <button id="publishBtn" class="gp-btn">Publish</button>
+    <a href="../dashboard.php" class="gp-btn">Back</a>
+  </div>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
+<!-- Main layout: left sidebar, canvas area, right inspector -->
+<div class="gp-wrap">
 
-    const blocks = document.querySelectorAll(".block");
-    const canvas = document.getElementById("canvas");
+  <!-- LEFT: Blocks + Search -->
+  <aside class="gp-leftpanel">
+    <div class="gp-search">
+      <input id="blockSearch" placeholder="Search elements or sections..." />
+    </div>
 
-    blocks.forEach(block => {
-        block.addEventListener("dragstart", (e) => {
-            e.dataTransfer.setData("file", block.dataset.file);
-        });
-    });
+    <div class="gp-tabs">
+      <button class="gp-tab active" data-tab="blocks">Elements</button>
+      <button class="gp-tab active" data-tab="sections">Sections</button>
+      <!-- <button class="gp-tab active" data-tab="assets">Assets</button> -->
+    </div>
 
-    canvas.addEventListener("dragover", (e) => {
-        e.preventDefault();
-    });
+    <div class="gp-panel" id="blocksPanel">
+      <div id="gjs-blocks" class="gjs-blocks-c"></div>
+    </div>
 
-    canvas.addEventListener("drop", async (e) => {
-        e.preventDefault();
-        const file = e.dataTransfer.getData("file");
+    <div class="gp-panel hidden" id="sectionsPanel">
+      <div id="gjs-sections"></div>
+    </div>
 
-      const response = await fetch("./blocks/" + file);
+    <div class="gp-panel hidden" id="assetsPanel">
+      <div id="gjs-assets"></div>
+    </div>
+  </aside>
 
-        const html = await response.text();
+  <!-- CENTER: Canvas with fixed sheet like Canva -->
+  <main class="gp-canvas-area">
+    <div class="gp-canvas-toolbar">
+      <!-- <span>Device:</span>
+      <select id="deviceSelect">
+        <option value="Desktop">Desktop</option>
+        <option value="Tablet">Tablet</option>
+        <option value="Mobile">Mobile</option>
+      </select> -->
+      <!-- <button id="addSectionBtn" class="gp-btn">+ Add section</button> -->
+       <button id="addSectionBtn" class="gp-btn">+ Add Page</button>
 
-        const wrapper = document.createElement("div");
-        wrapper.classList.add("element");
-        wrapper.innerHTML = html + `<button class="remove-btn">X</button>`;
+      <button id="clearCanvasBtn" class="gp-btn">Clear</button>
+    </div>
 
-        // Remove placeholder text when first block added
-        let placeholder = document.querySelector(".placeholder");
-        if (placeholder) placeholder.remove();
+    <div id="gjs" class="gp-canvas"></div>
+  </main>
 
-        canvas.appendChild(wrapper);
+  <!-- RIGHT -->
+  <!-- <aside class="gp-rightpanel" id="gpInspector">
+    <h4>Inspector</h4>
+    <div id="inspectorInner">
+      <p class="muted">Select an element to edit properties (style, attributes)</p>
+    </div>
+  </aside> -->
 
-        // Remove element button
-        wrapper.querySelector(".remove-btn").onclick = () => wrapper.remove();
-    });
-});
+</div>
 
-</script>
+<!-- GrapesJS and plugins -->
+<script src="https://unpkg.com/grapesjs"></script>
+<script src="https://unpkg.com/grapesjs-preset-webpage"></script>
 
+<!-- Our builder JS -->
+<script>const WEBSITE_ID = <?=json_encode($website_id)?>;</script>
+<script src="assets/js/builder.js"></script>
 </body>
 </html>

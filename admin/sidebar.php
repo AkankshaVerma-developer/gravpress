@@ -27,6 +27,10 @@
                 <span class="icon">📁</span>
                 <span>Media</span>
             </a>
+            <a href="plugins.php" class="nav-item">
+                <span class="icon">📁</span>
+                <span>Plugins</span>
+            </a>
             <a href="account_settings.php" class="nav-item">
                 <span class="icon">⚙️</span>
                 <span>Settings</span>

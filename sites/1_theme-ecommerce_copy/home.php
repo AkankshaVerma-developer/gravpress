@@ -38,7 +38,7 @@ session_start();
   <section class="hero">
     <div class="hero-box">
       <div class="hero-left">
-        <h2 style="font-size: 44px; color: #8e9f09;">Style meets Fashion</h2>
+        <h2 style="font-size: 44px; color: #e71313;">Style meets style</h2>
         <p>Have any questions or feedback? We love to hear from you!</p>
         <a class="btn-main" href="category.php">Shop Collection</a>
       </div>
@@ -69,7 +69,7 @@ session_start();
   <!-- PRODUCTS -->
   <section class="shop">
     <div class="shop-box">
-      <h2 style="font-size: 44px; color: #8e9f09;">New Arrivals</h2>
+      <h2 style="font-size: 44px; color: #e71313;">New Arrivals</h2>
       <div class="grid">
         <div class="card">
           <img src="https://images.unsplash.com/photo-1574180045827-681f8a1a9622?w=500" alt="Product 1">
@@ -94,7 +94,7 @@ session_start();
   <section class="touch">
     <div class="touch-box">
       <div class="touch-left">
-        <h2 style="font-size: 44px; color: #8e9f09;">Get in Touch</h2>
+        <h2 style="font-size: 44px; color: #e71313;">Get in Touch</h2>
         <p>Have any questions or feedback? We’d love to hear from you!</p>
         <form class="form">
           <input type="text" placeholder="Your Name" required>

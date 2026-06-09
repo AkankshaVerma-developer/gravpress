@@ -2,11 +2,9 @@
 // admin/builder/save_page.php
 session_start();
 require_once __DIR__ . '/../../connection/db.php';
-
 header('Content-Type: application/json; charset=utf-8');
-if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['status'=>'error','message'=>'Not logged in']); exit;
-}
+
+if (!isset($_SESSION['user_id'])) { echo json_encode(['status'=>'error','message'=>'Not logged in']); exit; }
 $user_id = intval($_SESSION['user_id']);
 
 $website_id = isset($_POST['website_id']) ? intval($_POST['website_id']) : 0;
@@ -25,7 +23,7 @@ $chk->store_result();
 if($chk->num_rows === 0){ echo json_encode(['status'=>'error','message'=>'Access denied']); exit; }
 $chk->close();
 
-// either update existing page or insert
+// update or insert
 $sel = $conn->prepare("SELECT page_id FROM pages WHERE website_id=? AND page_name=?");
 $sel->bind_param("is", $website_id, $page_name);
 $sel->execute();
